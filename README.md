@@ -17,16 +17,20 @@ Aplicación web interactiva desarrollada con Python, Plotly y Dash para analizar
 ## Estructura del Proyecto
 
 ```
-Actividad-4/
+Mortalidad2019/
 ├── Data/
 │   ├── Anexo1.NoFetal2019_CE_15-03-23.xlsx
 │   ├── Anexo2.CodigosDeMuerte_CE_15-03-23.xlsx
-│   └── Divipola_CE_.xlsx
+│   ├── Divipola_CE_.xlsx
+│   └── map.geojson
 ├── app.py                 # Aplicación principal Dash
+├── app_optimized.py      # Versión optimizada de la aplicación
 ├── data_processing.py     # Procesamiento y visualizaciones
 ├── data_exploration.py    # Exploración inicial de datos
-├── requirements.txt       # Dependencias
+├── requirements.txt       # Dependencias Python
+├── runtime.txt           # Versión de Python para despliegue
 ├── Procfile              # Para despliegue en Heroku/Render
+├── DEPLOY.md             # Guía de despliegue
 └── README.md
 ```
 
@@ -40,8 +44,8 @@ Actividad-4/
 
 1. Clonar el repositorio:
    ```bash
-   git clone [URL_DEL_REPOSITORIO]
-   cd Actividad-4
+   git clone https://github.com/juanpablogd/Mortalidad2019.git
+   cd Mortalidad2019
    ```
 
 2. Crear entorno virtual:
