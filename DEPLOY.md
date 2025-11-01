@@ -1,108 +1,101 @@
 # Instrucciones de Despliegue
 
-## Despliegue en Render.com (Recomendado)
+## Despliegue en Render.com
+
+**URL de la aplicación:** https://mortalidad2019.onrender.com/
+
+### Configuración utilizada
+
+**Repositorio:** juanpablogd/Mortalidad2019  
+**Plataforma:** Render.com  
+**Tipo:** Web Service  
+
+### Configuración del servicio
+
+```
+Name: mortalidad2019
+Environment: Python 3
+Region: Oregon (US West)
+Branch: main
+Build Command: pip install -r requirements.txt
+Start Command: gunicorn app:server
+Instance Type: Free
+```
+
+### Archivos de configuración necesarios
+
+**Procfile:**
+```
+web: gunicorn app:server
+```
+
+**runtime.txt:**
+```
+python-3.9.18
+```
+
+**requirements.txt:**
+```
+dash==2.17.1
+plotly==5.17.0
+pandas==2.1.4
+openpyxl==3.1.2
+dash-bootstrap-components==1.5.0
+numpy==1.26.2
+kaleido==0.2.1
+gunicorn==21.2.0
+```
+
+### Configuración de puerto
+
+La aplicación utiliza la variable de entorno PORT que Render asigna automáticamente:
+
+```python
+import os
+port = int(os.environ.get('PORT', 8050))
+app.run(debug=False, host='0.0.0.0', port=port)
+```
 
 ### Pasos para desplegar
 
-1. Preparar repositorio:
-   - Asegurar que todos los archivos estén en GitHub
-   - Verificar que `requirements.txt` y `Procfile` estén presentes
+1. Crear cuenta en Render.com
+2. Conectar repositorio de GitHub
+3. Crear nuevo Web Service
+4. Configurar según especificaciones arriba
+5. Hacer deploy
 
-2. Crear cuenta en Render:
-   - Ir a https://render.com
-   - Registrarse con GitHub
+### Problemas solucionados durante el despliegue
 
-3. Configurar Web Service:
-   - Seleccionar "New Web Service"
-   - Conectar repositorio de GitHub
-   - Configurar:
-     - Name: `mortalidad-colombia-2019`
-     - Environment: `Python 3`
-     - Build Command: `pip install -r requirements.txt`
-     - Start Command: `gunicorn app:server`
-     - Instance Type: `Free`
+**Error de compatibilidad de Python:**
+- pandas 2.1.4 requiere Python 3.9 o superior
+- Solución: actualizar runtime.txt a python-3.9.18
 
-4. Variables de entorno (opcional):
-   ```
-   PYTHON_VERSION=3.8.10
-   ```
+**Error de puerto:**
+- Render no detectaba el puerto de la aplicación
+- Solución: configurar PORT desde variable de entorno
 
-5. Desplegar:
-   - Hacer clic en "Create Web Service"
-   - Esperar el proceso de build (5-10 minutos aproximadamente)
+**Start command incorrecto:**
+- Usar gunicorn app:server donde server = app.server está definido en app.py
 
-### URL de ejemplo
-`https://mortalidad-colombia-2019.onrender.com`
+### Especificaciones técnicas
 
----
+**Datos procesados:**
+- 244,355 registros de mortalidad no fetal 2019
+- 33 departamentos de Colombia
+- 1,026 municipios únicos
+- Archivos: 3 Excel + 1 GeoJSON (aproximadamente 50MB total)
 
-## Despliegue en Railway.app
+**Rendimiento:**
+- Build time: 3-5 minutos
+- Primera carga: 30-60 segundos
+- Memoria utilizada: aproximadamente 500MB
 
-1. Conectar repositorio:
-   - Ir a https://railway.app
-   - Conectar con GitHub
-   - Seleccionar repositorio
+### Información del proyecto
 
-2. Configuración automática:
-   - Railway detecta automáticamente Python
-   - Usa el Procfile para el comando de inicio
+**Universidad:** Universidad de La Salle  
+**Programa:** Maestría en Inteligencia Artificial  
+**Materia:** Aplicaciones I  
+**Cohorte:** 2025-II  
 
-3. Variables de entorno:
-   ```
-   PORT=8050
-   ```
-
----
-
-## Despliegue en Heroku
-
-```bash
-# Instalar Heroku CLI
-# Crear aplicación
-heroku create mortalidad-colombia-2019
-
-# Configurar variables
-heroku config:set PYTHON_VERSION=3.8.10
-
-# Desplegar
-git push heroku main
-
-# Abrir aplicación
-heroku open
-```
-
----
-
-## Checklist Pre-Despliegue
-
-- requirements.txt actualizado
-- Procfile creado
-- app.py con server = app.server
-- Datos en carpeta Data/
-- README.md documentado
-- Repositorio en GitHub
-
----
-
-## Solución de Problemas
-
-### Error: "Application failed to bind to port"
-- Verificar que el Procfile use: `web: gunicorn app:server`
-- Asegurar que `server = app.server` esté en app.py
-
-### Error: "Module not found"
-- Verificar que todas las librerías estén en requirements.txt
-- Usar versiones específicas (ej: pandas==2.1.4)
-
-### Carga lenta de datos
-- Los archivos Excel son grandes (aproximadamente 50MB)
-- El primer arranque puede tardar 2-3 minutos
-- Considerar usar CSV para mejor rendimiento
-
----
-
-## Monitoreo
-
-- Logs: Revisar logs de la plataforma para errores
-- Métricas: Monitorear uso de memoria (los datos requieren aproximadamente 500MB)
-- Rendimiento: Primera carga lenta, subsecuentes más rápidas
+**Fuente de datos:** DANE - Estadísticas Vitales EEVV 2019  
+**Tipo:** Análisis de datos públicos de mortalidad en Colombia
