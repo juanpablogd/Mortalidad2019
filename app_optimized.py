@@ -343,6 +343,8 @@ app.layout = dbc.Container([
 ], fluid=True, style={'padding': '20px'})
 
 if __name__ == '__main__':
+    import os
+    port = int(os.environ.get('PORT', 8050))
     print("🚀 Iniciando servidor...")
-    print("🌐 Accede en: http://127.0.0.1:8050")
-    app.run_server(debug=True, host='0.0.0.0', port=8050)
+    print(f"🌐 Accede en: http://127.0.0.1:{port}")
+    app.run_server(debug=False, host='0.0.0.0', port=port)
