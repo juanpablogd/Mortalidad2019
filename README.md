@@ -29,18 +29,18 @@ Mortalidad2019/
 ├── data_exploration.py    # Exploración inicial de datos
 ├── requirements.txt       # Dependencias Python
 ├── runtime.txt           # Versión de Python para despliegue
-├── Procfile              # Para despliegue en Heroku/Render
+├── Procfile              # Configuración para despliegue
 ├── DEPLOY.md             # Guía de despliegue
 └── README.md
 ```
 
-## Instalación y Ejecución
+## Instalación y Ejecución Local
 
 ### Requisitos previos
-- Python 3.8 o superior
+- Python 3.9 o superior
 - pip
 
-### Pasos para ejecutar
+### Pasos para ejecutar localmente
 
 1. Clonar el repositorio:
    ```bash
@@ -70,30 +70,11 @@ Mortalidad2019/
 6. Acceder a la aplicación:
    Abrir navegador en: `http://127.0.0.1:8050`
 
-## Despliegue en Plataformas Cloud
+## Aplicación Desplegada
 
-### Render.com (Recomendado)
+La aplicación está disponible en línea en: **https://mortalidad2019.onrender.com/**
 
-1. Conectar repositorio GitHub a Render
-2. Crear nuevo Web Service
-3. Configurar:
-   - Build Command: `pip install -r requirements.txt`
-   - Start Command: `gunicorn app:server`
-   - Environment: Python 3
-
-### Railway.app
-
-1. Conectar repositorio a Railway
-2. El despliegue es automático usando Procfile
-
-### Heroku
-
-1. Instalar Heroku CLI
-2. Ejecutar:
-   ```bash
-   heroku create tu-app-mortalidad-colombia
-   git push heroku main
-   ```
+Para más información sobre el despliegue, consultar el archivo `DEPLOY.md`
 
 ## Fuentes de Datos
 
@@ -142,13 +123,16 @@ Análisis basado en códigos CIE-10:
 
 ## Tecnologías Utilizadas
 
-- Python 3.8+: Lenguaje principal
+- Python 3.9: Lenguaje principal
 - Dash 2.17: Framework web interactivo
 - Plotly 5.17: Visualizaciones dinámicas
 - Pandas 2.1: Manipulación de datos
 - Bootstrap: Diseño responsivo
 - Gunicorn: Servidor WSGI para producción
+- Render.com: Plataforma de despliegue
 
 ## Información del Proyecto
 
-Este proyecto fue desarrollado como parte de la Actividad 4 del curso, enfocado en el desarrollo de aplicaciones web dinámicas para visualización de datos de salud pública.
+Trabajo académico desarrollado para el curso de Aplicaciones I, Maestría en Inteligencia Artificial, Universidad de La Salle, Cohorte 2025-II.
+
+El proyecto se enfoca en el análisis y visualización de datos de mortalidad en Colombia para el año 2019, utilizando datos públicos del DANE.
